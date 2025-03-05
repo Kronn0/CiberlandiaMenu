@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ComandasComponent } from './comandas/comandas.component'; // Importa el módulo HTTP
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
     RouterModule,
     ComandasComponent,
     AppRoutingModule,
+    FormsModule,
 
   ],
   providers: [],

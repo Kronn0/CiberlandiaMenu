@@ -1,58 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 
-// Ruta para obtener todos los pedidos
-app.get("/api/orders", (req, res) => {
+// Ruta para agregar un nuevo pedido
+app.post("/api/orders", (req, res) => {
   const filePath = path.join(__dirname, "pedidos.json");
-  fs.readFile(filePath, "utf-8", (err, data) => {
-    if (err) {
-      console.error("Error al leer el archivo:", err);
-      return res.status(500).json({ error: "Error al leer el archivo" });
-    }
-    const orders = JSON.parse(data);
-    res.json(orders);
-  });
-});
-
-// Ruta para obtener un pedido específico por su ID
-app.get("/api/orders/:id", (req, res) => {
-  const filePath = path.join(__dirname, "pedidos.json");
-  const orderId = parseInt(req.params.id, 10);
-
-  fs.readFile(filePath, "utf-8", (err, data) => {
-    if (err) {
-      console.error("Error al leer el archivo:", err);
-      return res.status(500).json({ error: "Error al leer el archivo" });
-    }
-
-    const orders = JSON.parse(data);
-
-    // Buscar el pedido por ID
-    const order = orders.find((o) => o.id === orderId);
-
-    if (order) {
-      res.json(order);
-    } else {
-      res.status(404).json({ error: "Pedido no encontrado" });
-    }
-  });
-});
-
-// Ruta para actualizar un pedido (modificar "striked")
-app.put("/api/orders/:id", (req, res) => {
-  const filePath = path.join(__dirname, "pedidos.json");
-  const orderId = parseInt(req.params.id, 10);
-  const { striked } = req.body;
+  const newOrder = req.body;
 
   fs.readFile(filePath, "utf-8", (err, data) => {
     if (err) {
@@ -62,25 +23,34 @@ app.put("/api/orders/:id", (req, res) => {
 
     let orders = JSON.parse(data);
 
-    const orderIndex = orders.findIndex((order) => order.id === orderId);
-    if (orderIndex !== -1) {
-      orders[orderIndex].striked = striked;
+    // Generar un ID único para el nuevo pedido
+    const nextId = orders.length > 0 ? orders[orders.length - 1].id + 1 : 1;
 
-      fs.writeFile(filePath, JSON.stringify(orders, null, 2), (writeErr) => {
-        if (writeErr) {
-          console.error("Error al escribir en el archivo:", writeErr);
-          return res.status(500).json({ error: "Error al escribir en el archivo" });
-        }
+    // Crear el nuevo pedido con el orden correcto
+    const formattedOrder = {
+      id: nextId, // Se genera el ID automáticamente
+      food: newOrder.food,
+      table: newOrder.table,
+      zone: newOrder.zone,
+      striked: false
+    };
 
-        res.json(orders[orderIndex]);
-      });
-    } else {
-      res.status(404).json({ error: "Pedido no encontrado" });
-    }
+    // Agregar el nuevo pedido a la lista
+    orders.push(formattedOrder);
+
+    // Escribir los pedidos actualizados en el archivo
+    fs.writeFile(filePath, JSON.stringify(orders, null, 2), (writeErr) => {
+      if (writeErr) {
+        console.error("Error al escribir en el archivo:", writeErr);
+        return res.status(500).json({ error: "Error al escribir en el archivo" });
+      }
+
+      res.status(201).json(formattedOrder); // Enviar el nuevo pedido al cliente
+    });
   });
 });
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });

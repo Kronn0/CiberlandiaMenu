@@ -5,6 +5,7 @@ import { Order } from '../order.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  standalone: true,
   styleUrls: ['./app.component.css']
 })
 export class CreateOrder {
@@ -20,11 +21,11 @@ export class CreateOrder {
     this.orderService.getNewOrder().subscribe(
       (newOrder: Order) => {
         this.orderService.addOrder(newOrder).subscribe(
-          (addedOrder) => {
+          (addedOrder: any) => {
             this.orderService.updateOrders(addedOrder);
             console.log('Order added to backend');
           },
-          error => console.error('Error adding order:', error)
+            (error: any) => console.error('Error adding order:', error)
         );
       },
       error => console.error('Error fetching order:', error)

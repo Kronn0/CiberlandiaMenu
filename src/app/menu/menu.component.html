@@ -1,4 +1,69 @@
 <div style="padding: 20px;">
   <h1>Página de Menú</h1>
-  <p>Contenido relacionado con el menú aquí.</p>
+
+  <!-- Dropdown para seleccionar zona -->
+  <div style="margin-bottom: 20px;">
+    <label style="font-weight: bold;">Selecciona Zona:</label>
+    <select [(ngModel)]="selectedZone" (change)="onZoneChange()" style="margin-left: 10px;">
+      <option *ngFor="let zone of zones" [value]="zone">{{ zone }}</option>
+    </select>
+  </div>
+
+  <!-- Dropdown para seleccionar mesa (solo si la zona no es Barra) -->
+  <div *ngIf="selectedZone !== 'Barra'" style="margin-bottom: 20px;">
+    <label style="font-weight: bold;">Selecciona Mesa:</label>
+    <select [(ngModel)]="selectedTable" style="margin-left: 10px;">
+      <option *ngFor="let table of tables" [value]="table">{{ table }}</option>
+    </select>
+  </div>
+
+  <!-- Botones de selección (Radio Buttons) organizados en 3 columnas -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <!-- Columna de Comida Principal -->
+    <div style="flex: 1; margin-right: 10px;">
+      <p><strong>Comida Principal:</strong></p>
+      <div *ngFor="let food of foodOptions">
+        <input
+          type="radio"
+          [(ngModel)]="selectedFood"
+          [value]="food"
+          name="food"
+        />
+        <label>{{ food }}</label>
+      </div>
+    </div>
+
+    <!-- Columna de Bebidas -->
+    <div style="flex: 1; margin-right: 10px;">
+      <p><strong>Bebidas:</strong></p>
+      <div *ngFor="let drink of drinkOptions">
+        <input
+          type="radio"
+          [(ngModel)]="selectedDrink"
+          [value]="drink"
+          name="drink"
+        />
+        <label>{{ drink }}</label>
+      </div>
+    </div>
+
+    <!-- Columna de Postres -->
+    <div style="flex: 1;">
+      <p><strong>Postres:</strong></p>
+      <div *ngFor="let dessert of dessertOptions">
+        <input
+          type="radio"
+          [(ngModel)]="selectedDessert"
+          [value]="dessert"
+          name="dessert"
+        />
+        <label>{{ dessert }}</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para enviar pedido -->
+  <button (click)="makeOrder()" style="background-color: teal; color: white; padding: 10px; border: none; border-radius: 5px;">
+    Realizar Pedido
+  </button>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 
@@ -21,13 +21,25 @@ interface Order {
   ],
   styleUrls: ['./comandas.component.css']
 })
-export class ComandasComponent implements OnInit {
+export class ComandasComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
+  private refreshInterval: any;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadOrders();
+
+    // Configurar recarga automática cada 5 segundos
+    this.refreshInterval = setInterval(() => {
+      this.loadOrders(); // Recarga las órdenes periódicamente
+    }, 5000); // Cada 5000 ms = 5 segundos
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval); // Limpia el intervalo cuando el componente se destruye
+    }
   }
 
   // Cargar pedidos desde el backend

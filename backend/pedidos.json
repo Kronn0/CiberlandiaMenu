@@ -1,23 +1,23 @@
 [
   {
     "id": 1,
-    "food": "Pizza",
-    "table": "1",
-    "zone": "A",
-    "striked": false
+    "food": "Tarta",
+    "table": null,
+    "zone": "Barra",
+    "striked": true
   },
   {
     "id": 2,
-    "food": "Spaghetti",
-    "table": "2",
-    "zone": "B",
+    "food": "Sushi",
+    "table": "3",
+    "zone": "Comedor 2",
     "striked": false
   },
   {
     "id": 3,
-    "food": "Salad",
-    "table": "3",
-    "zone": "C",
-    "striked": false
+    "food": "Sushi",
+    "table": "1",
+    "zone": "Comedor 1",
+    "striked": true
   }
 ]
