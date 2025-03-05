@@ -1,0 +1,31 @@
+<div style="padding: 20px;">
+  <h1>Crear Nuevo Pedido :SS</h1>
+
+  <form (ngSubmit)="submitOrder()">
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">Comida:</label>
+      <select [(ngModel)]="newOrder.food" name="food" required>
+        <option *ngFor="let food of foodOptions" [value]="food">{{food}}</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">Mesa:</label>
+      <select [(ngModel)]="newOrder.table" name="table" required>
+        <option *ngFor="let table of tableOptions" [value]="table">{{table}}</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">Zona:</label>
+      <select [(ngModel)]="newOrder.zone" name="zone" required>
+        <option *ngFor="let zone of zoneOptions" [value]="zone">{{zone}}</option>
+      </select>
+    </div>
+
+    <button type="submit">Añadir Pedido</button>
+    <a routerLink="/" style="margin-left: 10px;">
+      <button type="button">Cancelar</button>
+    </a>
+  </form>
+</div>

@@ -1,0 +1,32 @@
+<div style="padding: 20px;">
+  <h1>Lista de Pedidos</h1>
+
+  <button (click)="addNewOrder()">Nuevo Pedido Aleatorio</button>
+  <a routerLink="/create-order" style="margin-left: 10px;">
+    <button>Crear Pedido Manual</button>
+  </a>
+
+  <div style="margin-top: 20px;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+      <tr>
+        <th style="border: 1px solid black; padding: 8px;">Comida</th>
+        <th style="border: 1px solid black; padding: 8px;">Mesa</th>
+        <th style="border: 1px solid black; padding: 8px;">Zona</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders">
+        <td style="border: 1px solid black; padding: 8px;">{{order.food}}</td>
+        <td style="border: 1px solid black; padding: 8px;">{{order.table}}</td>
+        <td style="border: 1px solid black; padding: 8px;">{{order.zone}}</td>
+      </tr>
+      <tr *ngIf="orders.length === 0">
+        <td colspan="3" style="text-align: center; padding: 8px;">
+          No hay pedidos aún
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
