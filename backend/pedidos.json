@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "food": "Pizza",
+    "table": "1",
+    "zone": "A",
+    "striked": false
+  },
+  {
+    "id": 2,
+    "food": "Spaghetti",
+    "table": "2",
+    "zone": "B",
+    "striked": false
+  },
+  {
+    "id": 3,
+    "food": "Salad",
+    "table": "3",
+    "zone": "C",
+    "striked": false
+  }
+]

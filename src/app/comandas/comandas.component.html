@@ -1,0 +1,38 @@
+<div class="comandas">
+  <h1>Comandas</h1>
+  <p>Esta página lista todos los pedidos actuales.</p>
+
+  <div *ngIf="orders.length > 0; else noOrders" class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th>Recibido</th>
+        <th>Comida</th>
+        <th>Mesa</th>
+        <th>Zona</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let order of orders; let i = index"
+        [ngClass]="{ 'row-striked': order.striked }"
+      >
+        <td>
+          <input
+            type="checkbox"
+            (change)="onCheck(i)"
+            [checked]="order.striked"
+          />
+        </td>
+        <td>{{ order.food }}</td>
+        <td>{{ order.table }}</td>
+        <td>{{ order.zone }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noOrders>
+    <p>No hay pedidos disponibles actualmente.</p>
+  </ng-template>
+</div>
