@@ -1,32 +1,119 @@
-<div style="padding: 20px;">
+<div class="order-list">
   <h1>Lista de Pedidos</h1>
 
-  <button (click)="addNewOrder()">Nuevo Pedido Aleatorio</button>
-  <a routerLink="/create-order" style="margin-left: 10px;">
-    <button>Crear Pedido Manual</button>
-  </a>
+  <div class="button-group">
+    <button (click)="addNewOrder()" class="primary-btn">Nuevo Pedido Aleatorio</button>
+    <a routerLink="/create-order">
+      <button class="secondary-btn">Crear Pedido Manual</button>
+    </a>
+  </div>
 
-  <div style="margin-top: 20px;">
-    <table style="width: 100%; border-collapse: collapse;">
+  <div class="table-container">
+    <table>
       <thead>
       <tr>
-        <th style="border: 1px solid black; padding: 8px;">Comida</th>
-        <th style="border: 1px solid black; padding: 8px;">Mesa</th>
-        <th style="border: 1px solid black; padding: 8px;">Zona</th>
+        <th>Comida</th>
+        <th>Mesa</th>
+        <th>Zona</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let order of orders">
-        <td style="border: 1px solid black; padding: 8px;">{{order.food}}</td>
-        <td style="border: 1px solid black; padding: 8px;">{{order.table}}</td>
-        <td style="border: 1px solid black; padding: 8px;">{{order.zone}}</td>
+        <td>{{order.food}}</td>
+        <td>{{order.table}}</td>
+        <td>{{order.zone}}</td>
       </tr>
       <tr *ngIf="orders.length === 0">
-        <td colspan="3" style="text-align: center; padding: 8px;">
-          No hay pedidos aún
-        </td>
+        <td colspan="3" class="no-orders">No hay pedidos aún</td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<style>
+  .order-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+
+  h1 {
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+  }
+
+  .button-group {
+    margin-bottom: 20px;
+  }
+
+  .primary-btn, .secondary-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .primary-btn {
+    background: #3498db;
+    color: white;
+  }
+
+  .primary-btn:hover {
+    background: #2980b9;
+  }
+
+  .secondary-btn {
+    background: #ecf0f1;
+    color: #2c3e50;
+    margin-left: 10px;
+  }
+
+  .secondary-btn:hover {
+    background: #dfe6e9;
+  }
+
+  .table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    background: #3498db;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:hover:not(thead tr) {
+    background-color: #f5f6fa;
+    transition: background-color 0.3s ease;
+  }
+
+  .no-orders {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+    font-style: italic;
+    background: #f9f9f9;
+  }
+</style>
