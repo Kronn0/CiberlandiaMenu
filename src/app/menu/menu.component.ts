@@ -15,13 +15,11 @@ export class MenuComponent implements OnInit {
 
   // Opciones de comida, bebida y postres
   foodOptions: string[] = ["Hamburguesa", "Sushi", "Ensalada"];
-  drinkOptions: string[] = ["agua", "refresco", "vino"];
+  drinkOptions: string[] = ["Agua", "Refresco", "Vino"];
   dessertOptions: string[] = ["Tarta", "Helado", "Flan"];
 
-  // Elecciones únicas
-  selectedFood: string = "";
-  selectedDrink: string = "";
-  selectedDessert: string = "";
+  // Elección única
+  selectedItem: string = ""; // Nueva variable para representar una única selección
 
   constructor(private http: HttpClient) {}
 
@@ -42,18 +40,15 @@ export class MenuComponent implements OnInit {
       return;
     }
 
-    if (!this.selectedFood && !this.selectedDrink && !this.selectedDessert) {
-      alert("Por favor selecciona al menos un alimento, una bebida o un postre.");
+    if (!this.selectedItem) {
+      alert("Por favor selecciona un elemento (comida, bebida o postre).");
       return;
     }
 
-    // Determinar el valor del campo 'food'
-    const food = this.selectedFood || this.selectedDrink || this.selectedDessert;
-
-    // Crear objeto del pedido en el formato y orden requerido
+    // Crear objeto del pedido en el formato requerido
     const order = {
       id: 0, // El backend se encargará de asignar el ID correctamente
-      food: food, // Valor único
+      food: this.selectedItem, // Valor único
       table: this.selectedTable || null,
       zone: this.selectedZone,
       striked: false

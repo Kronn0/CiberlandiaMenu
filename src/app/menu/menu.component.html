@@ -25,9 +25,9 @@
       <div *ngFor="let food of foodOptions">
         <input
           type="radio"
-          [(ngModel)]="selectedFood"
+          [(ngModel)]="selectedItem"
           [value]="food"
-          name="food"
+          name="selectionGroup"
         />
         <label>{{ food }}</label>
       </div>
@@ -39,9 +39,9 @@
       <div *ngFor="let drink of drinkOptions">
         <input
           type="radio"
-          [(ngModel)]="selectedDrink"
+          [(ngModel)]="selectedItem"
           [value]="drink"
-          name="drink"
+          name="selectionGroup"
         />
         <label>{{ drink }}</label>
       </div>
@@ -53,9 +53,9 @@
       <div *ngFor="let dessert of dessertOptions">
         <input
           type="radio"
-          [(ngModel)]="selectedDessert"
+          [(ngModel)]="selectedItem"
           [value]="dessert"
-          name="dessert"
+          name="selectionGroup"
         />
         <label>{{ dessert }}</label>
       </div>

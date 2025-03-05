@@ -2,6 +2,7 @@
   <h1>Comandas</h1>
   <p>Esta página lista todos los pedidos actuales.</p>
 
+  <!-- Tabla de pedidos -->
   <div *ngIf="orders.length > 0; else noOrders" class="table-container">
     <table>
       <thead>
@@ -13,6 +14,7 @@
       </tr>
       </thead>
       <tbody>
+      <!-- Iterar sobre los pedidos -->
       <tr
         *ngFor="let order of orders; let i = index"
         [ngClass]="{ 'row-striked': order.striked }"
@@ -32,6 +34,7 @@
     </table>
   </div>
 
+  <!-- Plantilla alternativa si no hay pedidos -->
   <ng-template #noOrders>
     <p>No hay pedidos disponibles actualmente.</p>
   </ng-template>
@@ -62,7 +65,7 @@
   .table-container {
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
 

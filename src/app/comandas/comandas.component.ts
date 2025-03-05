@@ -42,31 +42,46 @@ export class ComandasComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Cargar pedidos desde el backend
+  // Cargar pedidos desde el backend (y ordenarlos según lógica requerida)
   loadOrders(): void {
-    this.http.get<Order[]>('http://localhost:3000/api/orders').subscribe(
-      (data) => {
-        this.orders = data;
-      },
-      (error) => {
-        console.error('Error al cargar los pedidos:', error);
-      }
-    );
+    this.http.get<Order[]>('http://localhost:3000/api/orders')
+      .subscribe(
+        (data) => {
+          // Ordenar por striked y luego por ID
+          this.orders = data.sort((a, b) => {
+            // Comparar primero por striked (false primero, true después)
+            if (a.striked !== b.striked) {
+              return a.striked ? 1 : -1;
+            }
+            // Si tienen el mismo estado striked, comparar por ID ascendente
+            return a.id - b.id;
+          });
+        },
+        (error) => {
+          console.error('Error al cargar los pedidos:', error);
+        }
+      );
   }
 
   // Manejar el cambio de estado striked
   onCheck(index: number): void {
     const order = this.orders[index];
     if (order) {
+      // Alternar el estado de striked
       order.striked = !order.striked;
 
-      // Mover al final si está marcado
-      if (order.striked) {
-        this.orders.push(...this.orders.splice(index, 1));
-      }
-
-      // Actualizar pedido en el backend
+      // Actualizar el pedido en el backend
       this.updateOrder(order);
+
+      // Volver a ordenar la lista con la misma lógica
+      this.orders.sort((a, b) => {
+        // Comparar primero por striked
+        if (a.striked !== b.striked) {
+          return a.striked ? 1 : -1;
+        }
+        // Si tienen el mismo estado striked, comparar por ID
+        return a.id - b.id;
+      });
     }
   }
 

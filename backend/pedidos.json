@@ -4,7 +4,7 @@
     "food": "Tarta",
     "table": null,
     "zone": "Barra",
-    "striked": true
+    "striked": false
   },
   {
     "id": 2,
@@ -19,5 +19,61 @@
     "table": "1",
     "zone": "Comedor 1",
     "striked": true
+  },
+  {
+    "id": 4,
+    "food": "refresco",
+    "table": "2",
+    "zone": "Comedor 2",
+    "striked": true
+  },
+  {
+    "id": 5,
+    "food": "Hamburguesa",
+    "table": null,
+    "zone": "Barra",
+    "striked": true
+  },
+  {
+    "id": 6,
+    "food": "Hamburguesa",
+    "table": "2",
+    "zone": "Comedor 2",
+    "striked": true
+  },
+  {
+    "id": 7,
+    "food": "Ensalada",
+    "table": "2",
+    "zone": "Comedor 2",
+    "striked": true
+  },
+  {
+    "id": 8,
+    "food": "Ensalada",
+    "table": "2",
+    "zone": "Comedor 2",
+    "striked": true
+  },
+  {
+    "id": 9,
+    "food": "Helado",
+    "table": "2",
+    "zone": "Comedor 2",
+    "striked": false
+  },
+  {
+    "id": 10,
+    "food": "Agua",
+    "table": null,
+    "zone": "Barra",
+    "striked": false
+  },
+  {
+    "id": 11,
+    "food": "Ensalada",
+    "table": "1",
+    "zone": "Comedor 2",
+    "striked": false
   }
 ]
