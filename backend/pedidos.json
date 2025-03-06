@@ -18,7 +18,7 @@
     "food": "Sushi",
     "table": "1",
     "zone": "Comedor 1",
-    "striked": true
+    "striked": false
   },
   {
     "id": 4,
@@ -60,7 +60,7 @@
     "food": "Helado",
     "table": "2",
     "zone": "Comedor 2",
-    "striked": false
+    "striked": true
   },
   {
     "id": 10,
@@ -73,6 +73,27 @@
     "id": 11,
     "food": "Ensalada",
     "table": "1",
+    "zone": "Comedor 2",
+    "striked": false
+  },
+  {
+    "id": 12,
+    "food": "Vino",
+    "table": null,
+    "zone": "Barra",
+    "striked": false
+  },
+  {
+    "id": 13,
+    "food": "Refresco",
+    "table": null,
+    "zone": "Barra",
+    "striked": false
+  },
+  {
+    "id": 14,
+    "food": "Agua",
+    "table": 1,
     "zone": "Comedor 2",
     "striked": false
   }
