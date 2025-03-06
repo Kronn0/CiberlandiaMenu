@@ -1,69 +1,184 @@
-<div style="padding: 20px;">
-  <h1>Página de Menú</h1>
+<div class="menu-container">
+  <h1>Menú</h1>
 
-  <!-- Dropdown para seleccionar zona -->
-  <div style="margin-bottom: 20px;">
-    <label style="font-weight: bold;">Selecciona Zona:</label>
-    <select [(ngModel)]="selectedZone" (change)="onZoneChange()" style="margin-left: 10px;">
-      <option *ngFor="let zone of zones" [value]="zone">{{ zone }}</option>
+  <!-- Selección de Zona -->
+  <div class="zone-selection">
+    <h2>Selecciona una Zona</h2>
+    <div class="zone-buttons">
+      <button *ngFor="let zone of zones"
+              (click)="selectZone(zone)"
+              [class.active]="selectedZone === zone">
+        {{ zone }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Selección de Mesa (Si no es Barra) -->
+  <div *ngIf="selectedZone !== 'Barra'" class="table-selection">
+    <h2>Selecciona una Mesa</h2>
+    <select [(ngModel)]="selectedTable">
+      <option *ngFor="let table of tables" [value]="table">
+        Mesa {{ table }}
+      </option>
     </select>
   </div>
 
-  <!-- Dropdown para seleccionar mesa (solo si la zona no es Barra) -->
-  <div *ngIf="selectedZone !== 'Barra'" style="margin-bottom: 20px;">
-    <label style="font-weight: bold;">Selecciona Mesa:</label>
-    <select [(ngModel)]="selectedTable" style="margin-left: 10px;">
-      <option *ngFor="let table of tables" [value]="table">{{ table }}</option>
-    </select>
-  </div>
-
-  <!-- Botones de selección (Radio Buttons) organizados en 3 columnas -->
-  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-    <!-- Columna de Comida Principal -->
-    <div style="flex: 1; margin-right: 10px;">
-      <p><strong>Comida Principal:</strong></p>
-      <div *ngFor="let food of foodOptions">
-        <input
-          type="radio"
-          [(ngModel)]="selectedItem"
-          [value]="food"
-          name="selectionGroup"
-        />
-        <label>{{ food }}</label>
+  <!-- Selección de Comida, Bebida y Postre en columnas -->
+  <div class="category-container">
+    <!-- Selección de Comida -->
+    <div class="category">
+      <h2>Comida</h2>
+      <div class="items">
+        <button *ngFor="let food of foodOptions"
+                (click)="selectItem(food)"
+                [class.active]="selectedItem === food">
+          <img src="../../images/descarga.png" alt="Comida" class="button-image" />
+          {{ food }}
+        </button>
       </div>
     </div>
 
-    <!-- Columna de Bebidas -->
-    <div style="flex: 1; margin-right: 10px;">
-      <p><strong>Bebidas:</strong></p>
-      <div *ngFor="let drink of drinkOptions">
-        <input
-          type="radio"
-          [(ngModel)]="selectedItem"
-          [value]="drink"
-          name="selectionGroup"
-        />
-        <label>{{ drink }}</label>
+    <!-- Selección de Bebida -->
+    <div class="category">
+      <h2>Bebidas</h2>
+      <div class="items">
+        <button *ngFor="let drink of drinkOptions"
+                (click)="selectItem(drink)"
+                [class.active]="selectedItem === drink">
+          <img src="../../images/descarga.png" alt="Bebida" class="button-image" />
+          {{ drink }}
+        </button>
       </div>
     </div>
 
-    <!-- Columna de Postres -->
-    <div style="flex: 1;">
-      <p><strong>Postres:</strong></p>
-      <div *ngFor="let dessert of dessertOptions">
-        <input
-          type="radio"
-          [(ngModel)]="selectedItem"
-          [value]="dessert"
-          name="selectionGroup"
-        />
-        <label>{{ dessert }}</label>
+    <!-- Selección de Postre -->
+    <div class="category">
+      <h2>Postres</h2>
+      <div class="items">
+        <button *ngFor="let dessert of dessertOptions"
+                (click)="selectItem(dessert)"
+                [class.active]="selectedItem === dessert">
+          <img src="../../images/descarga.png" alt="Postre" class="button-image" />
+          {{ dessert }}
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Botón para enviar pedido -->
-  <button (click)="makeOrder()" style="background-color: teal; color: white; padding: 10px; border: none; border-radius: 5px;">
-    Realizar Pedido
-  </button>
+  <!-- Botón para Enviar Pedido -->
+  <button class="order-button" (click)="makeOrder()">Realizar Pedido</button>
 </div>
+
+<style>
+  .menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  h1, h3 {
+    color: #2c3e50;
+  }
+
+  .zone-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .zone-buttons button {
+    background-color: #3498db;
+    border: none;
+    padding: 20px 30px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .zone-buttons button:hover,
+  .zone-buttons button.active {
+    background-color: #2980b9;
+    transform: translateY(-5px);
+  }
+
+  .table-selection select {
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .category-container {
+    display: flex;
+    justify-content: space-around;  /* Coloca las categorías en línea */
+    gap: 30px;  /* Espacio entre las columnas */
+    margin-top: 30px;
+  }
+
+  .category {
+    width: 200px;  /* Ajusta el tamaño de las columnas */
+  }
+
+  .category h2 {
+    font-size: 1.5em;
+    color: #34495e;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .items button {
+    padding: 20px 30px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-size: 1.2em;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .items button:hover {
+    background-color: #bdc3c7;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .items button.active {
+    background-color: #2ecc71;
+    color: white;
+    font-weight: bold;
+    border-color: #27ae60;
+  }
+
+  .button-image {
+    width: 30px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    margin-right: 10px; /* Espaciado entre la imagen y el texto */
+  }
+
+  .order-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 20px 40px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 30px;
+  }
+
+  .order-button:hover {
+    background-color: #c0392b;
+  }
+</style>

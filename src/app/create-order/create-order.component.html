@@ -1,121 +1,199 @@
-<div class="create-order">
-  <h1>Crear Nuevo Pedido</h1>
+<div class="menu-container">
+  <h1>📋 Menú</h1>
 
-  <form (ngSubmit)="submitOrder()" class="order-form">
-    <div class="form-group">
-      <label for="food">Comida:</label>
-      <select [(ngModel)]="newOrder.food" name="food" id="food" required>
-        <option *ngFor="let food of foodOptions" [value]="food">{{food}}</option>
-      </select>
+  <!-- Selección de Zona -->
+  <div class="zone-selection">
+    <h2>📍 Selecciona una Zona</h2>
+    <div class="zone-buttons">
+      <button *ngFor="let zone of zones"
+              (click)="selectZone(zone)"
+              [class.active]="selectedZone === zone">
+        {{ zone }}
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="table">Mesa:</label>
-      <select [(ngModel)]="newOrder.table" name="table" id="table" required>
-        <option *ngFor="let table of tableOptions" [value]="table">{{table}}</option>
-      </select>
-    </div>
+  <!-- Selección de Mesa (Si no es Barra) -->
+  <div *ngIf="selectedZone !== 'Barra'" class="table-selection">
+    <h2>🪑 Selecciona una Mesa</h2>
+    <select [(ngModel)]="selectedTable">
+      <option *ngFor="let table of tables" [value]="table">
+        Mesa {{ table }}
+      </option>
+    </select>
+  </div>
 
-    <div class="form-group">
-      <label for="zone">Zona:</label>
-      <select [(ngModel)]="newOrder.zone" name="zone" id="zone" required>
-        <option *ngFor="let zone of zoneOptions" [value]="zone">{{zone}}</option>
-      </select>
+  <!-- Selección de Comida -->
+  <div class="category">
+    <h2>🍽️ Comida</h2>
+    <div class="items">
+      <button *ngFor="let food of foodOptions"
+              (click)="selectItem(food)"
+              [class.active]="selectedItem === food">
+        {{ food }}
+      </button>
     </div>
+  </div>
 
-    <div class="button-group">
-      <button type="submit" class="primary-btn">Añadir Pedido</button>
-      <a routerLink="/">
-        <button type="button" class="secondary-btn">Cancelar</button>
-      </a>
+  <!-- Selección de Bebida -->
+  <div class="category">
+    <h2>🥤 Bebidas</h2>
+    <div class="items">
+      <button *ngFor="let drink of drinkOptions"
+              (click)="selectItem(drink)"
+              [class.active]="selectedItem === drink">
+        {{ drink }}
+      </button>
     </div>
-  </form>
+  </div>
+
+  <!-- Selección de Postre -->
+  <div class="category">
+    <h2>🍰 Postres</h2>
+    <div class="items">
+      <button *ngFor="let dessert of dessertOptions"
+              (click)="selectItem(dessert)"
+              [class.active]="selectedItem === dessert">
+        {{ dessert }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Botón para Enviar Pedido -->
+  <button class="order-button" (click)="makeOrder()">✅ Realizar Pedido</button>
 </div>
 
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
   .create-order {
     max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
+    margin: 40px auto;
+    padding: 25px;
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
   }
 
   h1 {
-    color: #2c3e50;
-    font-size: 2em;
+    color: #34495e;
+    font-size: 2rem;
     margin-bottom: 20px;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 5px;
+    font-weight: 600;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+    padding-bottom: 8px;
   }
 
   .order-form {
-    background: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
   .form-group {
     margin-bottom: 20px;
+    text-align: left;
   }
 
   label {
     display: block;
-    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+
+  /* Estilos de opciones */
+  .options-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .option input {
+    display: none;
+  }
+
+  .option span {
     color: #2c3e50;
     font-weight: 500;
   }
 
-  select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-    background: #f9f9f9;
-    color: #333;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-  }
-
-  select:focus {
+  .option:hover {
     border-color: #3498db;
-    outline: none;
+    background: #ecf0f1;
+    transform: scale(1.05);
   }
 
-  select:invalid {
-    color: #7f8c8d;
+  .option input:checked + span {
+    color: white;
+    font-weight: bold;
+  }
+
+  .option input:checked + span {
+    background: #3498db;
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
   }
 
   .button-group {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    margin-top: 20px;
   }
 
   .primary-btn, .secondary-btn {
-    padding: 10px 20px;
+    flex: 1;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
-    font-size: 1em;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
   }
 
   .primary-btn {
     background: #3498db;
     color: white;
+    margin-right: 10px;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
   }
 
   .primary-btn:hover {
     background: #2980b9;
+    transform: translateY(-2px);
   }
 
   .secondary-btn {
-    background: #ecf0f1;
-    color: #2c3e50;
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
   }
 
   .secondary-btn:hover {
-    background: #dfe6e9;
+    background: #c0392b;
+    transform: translateY(-2px);
+  }
+
+  a {
+    text-decoration: none;
   }
 </style>
