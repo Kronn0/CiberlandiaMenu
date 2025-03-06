@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  // URL base de tu backend
+  backendUrl = 'http://localhost:3000/images';
+
   // Opciones de zonas y mesas
   zones: string[] = ["Comedor 1", "Comedor 2", "Barra"];
   selectedZone: string = "";
@@ -14,13 +17,25 @@ export class MenuComponent implements OnInit {
   tables: number[] = [1, 2, 3, 4, 5];
   selectedTable: number | null = null;
 
-  // Opciones de comida, bebida y postres
-  foodOptions: string[] = ["Hamburguesa", "Sushi", "Ensalada"];
-  drinkOptions: string[] = ["Agua", "Refresco", "Vino"];
-  dessertOptions: string[] = ["Tarta", "Helado", "Flan"];
+  // Opciones con imágenes desde el backend
+  foodOptions = [
+    { name: "Hamburguesa", image: `${this.backendUrl}/hamburguesa.png` },
+    { name: "Sushi", image: `${this.backendUrl}/sushi.png` },
+    { name: "Ensalada", image: `${this.backendUrl}/ensalada.png` }
+  ];
+  drinkOptions = [
+    { name: "Agua", image: `${this.backendUrl}/agua.png` },
+    { name: "Refresco", image: `${this.backendUrl}/refresco.png` },
+    { name: "Vino", image: `${this.backendUrl}/vino.png` }
+  ];
+  dessertOptions = [
+    { name: "Tarta", image: `${this.backendUrl}/tarta.png` },
+    { name: "Helado", image: `${this.backendUrl}/helado.png` },
+    { name: "Flan", image: `${this.backendUrl}/flan.png` }
+  ];
 
   // Selección única del usuario
-  selectedItem: string = "";
+  selectedItem: any = null;
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +48,7 @@ export class MenuComponent implements OnInit {
   }
 
   // Seleccionar comida, bebida o postre
-  selectItem(item: string): void {
+  selectItem(item: any): void {
     this.selectedItem = item;
   }
 
@@ -56,7 +71,8 @@ export class MenuComponent implements OnInit {
 
     const order = {
       id: 0,
-      food: this.selectedItem,
+      food: this.selectedItem.name,
+      foodImage: this.selectedItem.image, // Incluimos la imagen en el pedido
       table: this.selectedTable,
       zone: this.selectedZone,
       striked: false

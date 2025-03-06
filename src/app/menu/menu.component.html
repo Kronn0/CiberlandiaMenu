@@ -23,43 +23,43 @@
     </select>
   </div>
 
-  <!-- Selección de Comida, Bebida y Postre en columnas -->
+  <!-- Selección de Comida, Bebida y Postre -->
   <div class="category-container">
     <!-- Selección de Comida -->
     <div class="category">
       <h2>Comida</h2>
-      <div class="items">
+      <div class="items-column">
         <button *ngFor="let food of foodOptions"
                 (click)="selectItem(food)"
                 [class.active]="selectedItem === food">
-          <img src="../../images/descarga.png" alt="Comida" class="button-image" />
-          {{ food }}
+          <img [src]="food.image" alt="{{ food.name }}" class="button-image" />
+          {{ food.name }}
         </button>
       </div>
     </div>
 
-    <!-- Selección de Bebida -->
+    <!-- Selección de Bebidas -->
     <div class="category">
       <h2>Bebidas</h2>
-      <div class="items">
+      <div class="items-column">
         <button *ngFor="let drink of drinkOptions"
                 (click)="selectItem(drink)"
                 [class.active]="selectedItem === drink">
-          <img src="../../images/descarga.png" alt="Bebida" class="button-image" />
-          {{ drink }}
+          <img [src]="drink.image" alt="{{ drink.name }}" class="button-image" />
+          {{ drink.name }}
         </button>
       </div>
     </div>
 
-    <!-- Selección de Postre -->
+    <!-- Selección de Postres -->
     <div class="category">
       <h2>Postres</h2>
-      <div class="items">
+      <div class="items-column">
         <button *ngFor="let dessert of dessertOptions"
                 (click)="selectItem(dessert)"
                 [class.active]="selectedItem === dessert">
-          <img src="../../images/descarga.png" alt="Postre" class="button-image" />
-          {{ dessert }}
+          <img [src]="dessert.image" alt="{{ dessert.name }}" class="button-image" />
+          {{ dessert.name }}
         </button>
       </div>
     </div>
@@ -113,13 +113,14 @@
 
   .category-container {
     display: flex;
-    justify-content: space-around;  /* Coloca las categorías en línea */
-    gap: 30px;  /* Espacio entre las columnas */
+    justify-content: space-around;
+    gap: 30px;
     margin-top: 30px;
   }
 
   .category {
-    width: 200px;  /* Ajusta el tamaño de las columnas */
+    width: 100%;
+    max-width: 220px; /* Ancho máximo para cada columna */
   }
 
   .category h2 {
@@ -127,33 +128,35 @@
     color: #34495e;
   }
 
-  .items {
+  /* Botones en columna (uno encima de otro) */
+  .items-column {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: column; /* Cambiamos a diseño vertical */
+    gap: 15px; /* Margen entre botones */
   }
 
-  .items button {
-    padding: 20px 30px;
+  .items-column button {
+    padding: 20px 10px;
     background-color: #ecf0f1;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    font-size: 1.2em;
+    font-size: 1em;
+    text-align: center;
     border: 2px solid transparent;
     display: flex;
+    flex-direction: row; /* Imagen y texto en una fila */
     align-items: center;
-    justify-content: center;
     gap: 10px;
   }
 
-  .items button:hover {
+  .items-column button:hover {
     background-color: #bdc3c7;
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  .items button.active {
+  .items-column button.active {
     background-color: #2ecc71;
     color: white;
     font-weight: bold;
@@ -161,24 +164,25 @@
   }
 
   .button-image {
-    width: 30px; /* Ajusta el tamaño de la imagen */
+    width: 50px; /* Ajusta el tamaño de la imagen */
     height: auto;
-    margin-right: 10px; /* Espaciado entre la imagen y el texto */
+    margin-right: 5px; /* Espaciado entre la imagen y el texto */
   }
 
   .order-button {
     background-color: #e74c3c;
     color: white;
     padding: 20px 40px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 30px;
+    margin: 20px 0;
+    transition: background 0.3s, transform 0.2s;
   }
 
   .order-button:hover {
     background-color: #c0392b;
+    transform: scale(1.1);
   }
 </style>

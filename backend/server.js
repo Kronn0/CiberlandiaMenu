@@ -5,7 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -97,8 +98,25 @@ app.put("/api/orders/:id", (req, res) => {
     });
   });
 });
+/*
+// Ruta hacia la carpeta del build generado por Angular
+const angularPath = path.join(__dirname, 'dist/ciberlandia');
 
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor iniciado en http://localhost:${PORT}`);
+// Servir los archivos estáticos de Angular
+app.use(express.static(angularPath));
+
+
+// Redirigir cualquier otra ruta al archivo index.html de Angular
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(angularPath, 'index.html'));
+});
+
+*/
+// Ruta para servir imágenes estáticas
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
+// Escuchar en todas las interfaces de red (0.0.0.0)
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor ejecutándose en http://0.0.0.0:${PORT}`);
 });
