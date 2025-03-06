@@ -25,6 +25,12 @@ export class ComandasComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   private refreshInterval: any;
 
+  // URL dinámica para el backend basada en window.location
+  private backendUrl = `${window.location.protocol}//${window.location.hostname}:3000`;
+
+  // URL base del servidor para imágenes
+  backendImageUrl = `${this.backendUrl}/images`;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -44,7 +50,7 @@ export class ComandasComponent implements OnInit, OnDestroy {
 
   // Cargar pedidos desde el backend (y ordenarlos según lógica requerida)
   loadOrders(): void {
-    this.http.get<Order[]>('http://localhost:3000/api/orders')
+    this.http.get<Order[]>(`${this.backendUrl}/api/orders`)
       .subscribe(
         (data) => {
           // Ordenar por striked y luego por ID
@@ -61,6 +67,15 @@ export class ComandasComponent implements OnInit, OnDestroy {
           console.error('Error al cargar los pedidos:', error);
         }
       );
+  }
+
+  // Generar la URL de la imagen basada en el nombre del platillo
+  getImageUrl(foodName: string): string {
+    // Convertir el nombre del platillo a formato válido para la URL
+    const formattedName = foodName.toLowerCase().replace(/\s/g, '') + '.png';
+
+    // Retornar la URL completa
+    return `${this.backendImageUrl}/${formattedName}`;
   }
 
   // Manejar el cambio de estado striked
@@ -88,7 +103,7 @@ export class ComandasComponent implements OnInit, OnDestroy {
   // Actualizar el estado de striked en el backend
   updateOrder(order: Order): void {
     this.http
-      .put(`http://localhost:3000/api/orders/${order.id}`, { striked: order.striked })
+      .put(`${this.backendUrl}/api/orders/${order.id}`, { striked: order.striked })
       .subscribe(
         (response) => {
           console.log('Pedido actualizado:', response);

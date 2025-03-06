@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  // URL base de tu backend
-  backendUrl = 'http://localhost:3000/images';
+  // URL dinámica para el backend basada en window.location
+  private backendUrl = `${window.location.protocol}//${window.location.hostname}:3000`;
 
   // Opciones de zonas y mesas
   zones: string[] = ["Comedor 1", "Comedor 2", "Barra"];
@@ -19,19 +19,19 @@ export class MenuComponent implements OnInit {
 
   // Opciones con imágenes desde el backend
   foodOptions = [
-    { name: "Hamburguesa", image: `${this.backendUrl}/hamburguesa.png` },
-    { name: "Sushi", image: `${this.backendUrl}/sushi.png` },
-    { name: "Ensalada", image: `${this.backendUrl}/ensalada.png` }
+    { name: "Hamburguesa", image: `${this.backendUrl}/images/hamburguesa.png` },
+    { name: "Sushi", image: `${this.backendUrl}/images/sushi.png` },
+    { name: "Ensalada", image: `${this.backendUrl}/images/ensalada.png` }
   ];
   drinkOptions = [
-    { name: "Agua", image: `${this.backendUrl}/agua.png` },
-    { name: "Refresco", image: `${this.backendUrl}/refresco.png` },
-    { name: "Vino", image: `${this.backendUrl}/vino.png` }
+    { name: "Agua", image: `${this.backendUrl}/images/agua.png` },
+    { name: "Refresco", image: `${this.backendUrl}/images/refresco.png` },
+    { name: "Vino", image: `${this.backendUrl}/images/vino.png` }
   ];
   dessertOptions = [
-    { name: "Tarta", image: `${this.backendUrl}/tarta.png` },
-    { name: "Helado", image: `${this.backendUrl}/helado.png` },
-    { name: "Flan", image: `${this.backendUrl}/flan.png` }
+    { name: "Tarta", image: `${this.backendUrl}/images/tarta.png` },
+    { name: "Helado", image: `${this.backendUrl}/images/helado.png` },
+    { name: "Flan", image: `${this.backendUrl}/images/flan.png` }
   ];
 
   // Selección única del usuario
@@ -78,7 +78,7 @@ export class MenuComponent implements OnInit {
       striked: false
     };
 
-    this.http.post('http://localhost:3000/api/orders', order).subscribe(
+    this.http.post(`${this.backendUrl}/api/orders`, order).subscribe(
       response => {
         alert("✅ Pedido realizado con éxito");
         console.log("Pedido enviado:", response);
