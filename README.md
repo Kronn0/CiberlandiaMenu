@@ -40,29 +40,34 @@ Este proyecto cuenta con un frontend y un backend. A continuación, se explican 
 ``` bash
    cd backend
 ```
-1. Ejecuta el siguiente comando para iniciar el servidor:
+2. Ejecuta el siguiente comando para iniciar el servidor:
 ``` bash
    node server.js
 ```
-1. El backend estará escuchando en la dirección:
+3. El backend estará escuchando en la dirección:
 ``` 
    http://ip-local:3000
 ```
 Este será el punto de conexión para todas las API utilizadas en el proyecto.
 ## **Ejecución del Frontend**
-1. Accede al directorio donde se encuentra el proyecto construido (el directorio `/dist/ciberlandia`):
+
+1. Buildeamos la aplicación
+
+``` bash
+   ng build --configuration production
+```
+
+2. Accede al directorio donde se encuentra el proyecto construido (el directorio `/dist/ciberlandia`):
 ``` bash
    cd dist/ciberlandia
 ```
-1. Inicia un servidor de producción con el siguiente comando:
+3. Inicia un servidor de producción con el siguiente comando:
 ``` bash
    serve -s -l 8080
 ```
-1. Abre tu navegador y visita:
+4. Abre tu navegador y visita:
 ``` 
    http://localhost:8080
    
    http://ip-local:8080
-```
 
-```
