@@ -70,6 +70,7 @@
 </div>
 
 <style>
+  /* Existing styles remain unchanged */
   .menu-container {
     max-width: 800px;
     margin: 0 auto;
@@ -128,11 +129,10 @@
     color: #34495e;
   }
 
-  /* Botones en columna (uno encima de otro) */
   .items-column {
     display: flex;
-    flex-direction: column; /* Cambiamos a diseño vertical */
-    gap: 15px; /* Margen entre botones */
+    flex-direction: column;
+    gap: 15px;
   }
 
   .items-column button {
@@ -145,7 +145,7 @@
     text-align: center;
     border: 2px solid transparent;
     display: flex;
-    flex-direction: row; /* Imagen y texto en una fila */
+    flex-direction: row;
     align-items: center;
     gap: 10px;
   }
@@ -164,9 +164,9 @@
   }
 
   .button-image {
-    width: 50px; /* Ajusta el tamaño de la imagen */
+    width: 50px;
     height: auto;
-    margin-right: 5px; /* Espaciado entre la imagen y el texto */
+    margin-right: 5px;
   }
 
   .order-button {
@@ -184,5 +184,39 @@
   .order-button:hover {
     background-color: #c0392b;
     transform: scale(1.1);
+  }
+
+  /* Media Query for Mobile Devices */
+  @media (max-width: 768px) {
+    .category-container {
+      flex-direction: column; /* Stack categories vertically */
+      align-items: center;
+      gap: 20px; /* Reduce gap for mobile */
+    }
+
+    .category {
+      max-width: 100%; /* Full width for each category */
+      width: 90%; /* Slightly less than full width for padding */
+    }
+
+    .zone-buttons {
+      flex-direction: column; /* Stack zone buttons vertically */
+      gap: 10px; /* Reduce gap for mobile */
+    }
+
+    .zone-buttons button {
+      padding: 15px 20px; /* Slightly smaller padding */
+      font-size: 1em; /* Smaller font size */
+    }
+
+    .table-selection select {
+      width: 90%; /* Full width with slight padding */
+      font-size: 1em; /* Smaller font size */
+    }
+
+    .order-button {
+      padding: 15px 30px; /* Slightly smaller padding */
+      font-size: 1em; /* Smaller font size */
+    }
   }
 </style>
