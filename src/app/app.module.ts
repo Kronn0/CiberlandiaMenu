@@ -7,12 +7,14 @@ import { ComandasComponent } from './comandas/comandas.component'; // Importa el
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule} from "@angular/forms";
+import { PanelAdministradorComponent } from './panel-administrador/panel-administrador.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
+    PanelAdministradorComponent
 
   ],
   imports: [

@@ -31,10 +31,12 @@
       <div class="items-column">
         <button *ngFor="let food of foodOptions"
                 (click)="selectItem(food)"
-                [class.active]="selectedItem === food">
+                [class.active]="selectedItem === food"
+                [class.red]="!isAvailable(food.name)">
           <img [src]="food.image" alt="{{ food.name }}" class="button-image" />
           {{ food.name }}
         </button>
+
       </div>
     </div>
 
@@ -44,7 +46,8 @@
       <div class="items-column">
         <button *ngFor="let drink of drinkOptions"
                 (click)="selectItem(drink)"
-                [class.active]="selectedItem === drink">
+                [class.active]="selectedItem === drink"
+                [class.red]="!isAvailable(drink.name)">
           <img [src]="drink.image" alt="{{ drink.name }}" class="button-image" />
           {{ drink.name }}
         </button>
@@ -57,7 +60,8 @@
       <div class="items-column">
         <button *ngFor="let dessert of dessertOptions"
                 (click)="selectItem(dessert)"
-                [class.active]="selectedItem === dessert">
+                [class.active]="selectedItem === dessert"
+                [class.red]="!isAvailable(dessert.name)">
           <img [src]="dessert.image" alt="{{ dessert.name }}" class="button-image" />
           {{ dessert.name }}
         </button>
@@ -180,6 +184,16 @@
     margin: 20px 0;
     transition: background 0.3s, transform 0.2s;
   }
+
+  .red {
+    background-color: red !important;
+    color: white !important;
+    border-color: darkred;
+    font-weight: bold;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
 
   .order-button:hover {
     background-color: #c0392b;
