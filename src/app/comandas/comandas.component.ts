@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {AppModule} from "../app.module";
 
 interface Order {
   id: number;
@@ -17,7 +18,8 @@ interface Order {
   imports: [
     NgClass,
     NgIf,
-    NgForOf
+    NgForOf,
+    AppModule
   ],
   styleUrls: ['./comandas.component.css']
 })

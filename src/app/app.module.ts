@@ -8,13 +8,15 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule} from "@angular/forms";
 import { PanelAdministradorComponent } from './panel-administrador/panel-administrador.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    PanelAdministradorComponent
+    PanelAdministradorComponent,
+    HeaderComponent
 
   ],
   imports: [
@@ -27,6 +29,9 @@ import { PanelAdministradorComponent } from './panel-administrador/panel-adminis
 
   ],
   providers: [],
+  exports: [
+    HeaderComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
