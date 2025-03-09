@@ -1,25 +1,34 @@
-<div class="form-horas">
-  <table>
-    <thead>
-    <tr>
-      <th>Entregado</th>
-      <th>Hora de Solicitud</th>
-      <th>Hora de Entrega</th>
-      <th>Diferencia</th>
-      <th>Bloquear</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let order of orders">
-      <td>
-        <input type="checkbox" [(ngModel)]="order.completed" (change)="toggleCompleted(order)">
-      </td>
-      <td>{{ order.orderDate | date:'shortTime' }}</td>
-      <td>{{ order.completedAt ? (order.completedAt | date:'shortTime') : 'Pendiente' }}</td>
-      <td>{{ getTimeDifference(order) }}</td>
-      <td>
-        <input type="checkbox" [(ngModel)]="order.blocked" (change)="toggleBlocked(order)">
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="comandas">
+  <app-header></app-header> <!-- Se usa el nuevo componente -->
+
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Entregar</th>
+        <th>Hora de Solicitud</th>
+        <th>Hora de Entrega</th>
+        <th>Diferencia</th>
+        <th>Bloquear</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.food }}</td>
+        <td>
+          <button (click)="markAsDelivered(order)" [disabled]="order.completed">
+            {{ order.completed ? 'Entregado' : 'Entregar' }}
+          </button>
+        </td>
+        <td>{{ order.orderDate | date:'shortTime' }}</td>
+        <td>{{ order.completedAt ? (order.completedAt | date:'shortTime') : 'Pendiente' }}</td>
+        <td>{{ getTimeDifference(order) }}</td>
+        <td>
+          <input type="checkbox" [checked]="order.locked" (change)="toggleLocked(order)">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

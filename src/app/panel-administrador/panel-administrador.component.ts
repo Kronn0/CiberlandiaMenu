@@ -9,8 +9,9 @@ interface Order {
   orderDate: string;
   completed: boolean;
   completedAt: string | null;
-  blocked: boolean;
+  locked: boolean;
 }
+
 @Component({
   selector: 'app-panel-administrador',
   templateUrl: './panel-administrador.component.html',
@@ -18,18 +19,7 @@ interface Order {
 })
 export class PanelAdministradorComponent implements OnInit {
   orders: Order[] = [];
-  private backendUrl = `${window.location.protocol}//${window.location.hostname}:3000`;
-  private apiUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/orders`;
-  private backendImageUrl = `${this.backendUrl}/images`;
-  foods = [
-    'Pizza',
-    'Hamburguesa',
-    'Ensalada',
-    'Pasta',
-    'Pasta con queso',
-    'Pasta con tomate',
-    'Pasta con queso y tomate',
-  ];
+  apiUrl = 'http://localhost:3000/api/orders';
 
   constructor(private http: HttpClient) {}
 
@@ -39,21 +29,23 @@ export class PanelAdministradorComponent implements OnInit {
 
   loadOrders() {
     this.http.get<Order[]>(this.apiUrl).subscribe(data => {
-      this.orders = data.map(order => ({
-        ...order,
-        blocked: false // Estado inicial
-      }));
+      this.orders = data;
     });
   }
 
-  toggleCompleted(order: Order) {
-    order.completed = !order.completed;
-    order.completedAt = order.completed ? new Date().toISOString() : null;
-    this.http.put(`${this.apiUrl}/${order.id}`, { completed: order.completed }).subscribe();
+  markAsDelivered(order: Order) {
+    if (!order.completed) {
+      order.completed = true;
+      order.completedAt = new Date().toISOString();
+      this.http.put(`${this.apiUrl}/${order.id}`, { completed: order.completed, completedAt: order.completedAt })
+        .subscribe();
+    }
   }
 
-  toggleBlocked(order: Order) {
-    order.blocked = !order.blocked;
+  toggleLocked(order: Order) {
+    order.locked = !order.locked;
+    this.http.put(`${this.apiUrl}/${order.id}`, { locked: order.locked })
+      .subscribe();
   }
 
   getTimeDifference(order: Order): string {
