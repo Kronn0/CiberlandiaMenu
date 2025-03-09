@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   `,
   styles: [],
 })
-export class AppComponent {}
+export class AppComponent {
+  title: "Ciberlandia" | undefined
+}
