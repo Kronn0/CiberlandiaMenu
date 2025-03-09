@@ -12,17 +12,18 @@ import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MenuComponent,
-        PanelAdministradorComponent,
-        HeaderComponent,
-        ComandasComponent
-    ],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    PanelAdministradorComponent,
+    HeaderComponent
+
+  ],
   imports: [
     BrowserModule,
     HttpClientModule, // Asegúrate de que esté incluido
     RouterModule,
+    ComandasComponent,
     AppRoutingModule,
     FormsModule,
 
