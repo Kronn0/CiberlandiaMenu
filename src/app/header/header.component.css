@@ -1,17 +1,25 @@
 .header {
+  width: 100%; /* Ocupa todo el ancho */
   background-color: #3498db;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 15px 20px;
   font-size: 1.5em;
   font-weight: bold;
-  border-radius: 10px 10px 0 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px; /* Espacio entre los elementos */
-  margin-bottom: 20px; /* Mayor separación del contenido inferior */
+  justify-content: space-between; /* Espacio entre los elementos */
+  position: fixed; /* Se mantiene fijo arriba */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header h1 {
+  flex-grow: 1; /* Hace que el título se expanda */
+  text-align: center;
+  margin: 0;
 }
 
 .header-logo {
@@ -19,10 +27,6 @@
   height: auto;
 }
 
-.left {
-  margin-right: auto;
-}
-
-.right {
-  margin-left: auto;
+.comandas {
+  margin-top: 80px; /* Ajusta el contenido para que no quede tapado por el header */
 }
