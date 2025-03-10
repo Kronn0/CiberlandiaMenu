@@ -12,6 +12,7 @@
         <th>Hora de Entrega</th>
         <th>Diferencia</th>
         <th>Bloquear</th>
+        <th>Eliminar</th>
       </tr>
       </thead>
       <tbody>
@@ -28,6 +29,14 @@
         <td>
           <input type="checkbox" [checked]="order.locked" (change)="toggleLocked(order)" />
         </td>
+        <td>
+          <button
+            (click)="deleteOrder(order.id)"
+            [ngStyle]="{'background-color': 'red', 'color': 'white', 'border': 'none', 'padding': '5px 10px', 'border-radius': '3px'}">
+            Eliminar
+          </button>
+        </td>
+
       </tr>
       </tbody>
     </table>

@@ -77,6 +77,24 @@ export class PanelAdministradorComponent implements OnInit, OnDestroy {
       );
     }
   }
+  deleteOrder(orderId: number): void {
+    const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este pedido?');
+    if (confirmDelete) {
+      this.http.delete(`${this.apiBase}/orders/${orderId}`).subscribe(
+        () => {
+          // Eliminamos el pedido de la lista local
+          this.orders = this.orders.filter(order => order.id !== orderId);
+          console.log(`Pedido con ID ${orderId} eliminado exitosamente.`);
+        },
+        (error) => {
+          console.error(`Error al eliminar el pedido con ID ${orderId}:`, error);
+        }
+      );
+    } else {
+      console.log(`Eliminación del pedido con ID ${orderId} cancelada.`);
+    }
+  }
+
 
   toggleLocked(order: Order) {
     const updatedLocked = { locked: !order.locked };

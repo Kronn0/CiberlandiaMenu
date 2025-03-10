@@ -148,6 +148,38 @@ app.put("/api/orders/:id", (req, res) => {
   });
 });
 
+// Ruta para eliminar un pedido por ID
+app.delete('/api/orders/:id', (req, res) => {
+  const orderId = parseInt(req.params.id);
+  const filePath = path.join(__dirname, 'pedidos.json');
+
+  fs.readFile(filePath, 'utf-8', (err, data) => {
+    if (err) {
+      console.error('Error al leer el archivo:', err);
+      return res.status(500).json({ error: 'Error al leer el archivo' });
+    }
+
+    let orders = JSON.parse(data);
+    const orderIndex = orders.findIndex(order => order.id === orderId);
+
+    if (orderIndex === -1) {
+      return res.status(404).json({ error: `Pedido con ID ${orderId} no encontrado.` });
+    }
+
+    orders.splice(orderIndex, 1); // Eliminar el pedido del array
+
+    fs.writeFile(filePath, JSON.stringify(orders, null, 2), writeErr => {
+      if (writeErr) {
+        console.error('Error al escribir en el archivo:', writeErr);
+        return res.status(500).json({ error: 'Error al escribir el archivo' });
+      }
+
+      res.status(200).json({ message: `Pedido con ID ${orderId} eliminado.` });
+    });
+  });
+});
+
+
 // Ruta para servir imágenes estáticas
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
