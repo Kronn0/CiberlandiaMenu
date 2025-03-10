@@ -1,7 +1,8 @@
 <div class="comandas">
-  <app-header></app-header> <!-- Se usa el nuevo componente -->
-
+  <app-header></app-header>
+  <!-- Pedidos -->
   <div class="table-container">
+    <h2>Comandas</h2>
     <table>
       <thead>
       <tr>
@@ -21,11 +22,38 @@
             {{ order.completed ? 'Entregado' : 'Entregar' }}
           </button>
         </td>
-        <td>{{ order.orderDate | date:'shortTime' }}</td>
-        <td>{{ order.completedAt ? (order.completedAt | date:'shortTime') : 'Pendiente' }}</td>
+        <td>{{ order.orderDate | date: 'shortTime' }}</td>
+        <td>{{ order.completedAt ? (order.completedAt | date: 'shortTime') : 'Pendiente' }}</td>
         <td>{{ getTimeDifference(order) }}</td>
         <td>
-          <input type="checkbox" [checked]="order.locked" (change)="toggleLocked(order)">
+          <input type="checkbox" [checked]="order.locked" (change)="toggleLocked(order)" />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Menú -->
+  <div class="menu-list">
+    <h2>Menú</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Comida</th>
+        <th>Disponibilidad</th>
+        <th>Acción</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of menuItems">
+        <td>{{ item.name }}</td>
+        <td>{{ item.available ? 'Disponible' : 'No disponible' }}</td>
+        <td>
+          <button
+            (click)="toggleMenuItemAvailability(item)"
+            [ngStyle]="{'background-color': item.available ? 'green' : 'red', 'color': 'white'}">
+            {{ item.available ? 'Marcar No Disponible' : 'Marcar Disponible' }}
+          </button>
         </td>
       </tr>
       </tbody>

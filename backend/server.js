@@ -55,7 +55,8 @@ app.post("/api/orders", (req, res) => {
       striked: false,
       orderDate: new Date().toISOString(), // Fecha y hora actuales en formato ISO
       completed: false,                   // Siempre falso al crear un nuevo pedido
-      completedAt: null                   // Inicialmente nulo
+      completedAt: null,                   // Inicialmente nulo
+      diffTime: null
     };
 
     orders.push(formattedOrder);
@@ -70,6 +71,50 @@ app.post("/api/orders", (req, res) => {
     });
   });
 });
+
+// Ruta para actualizar un pedido por ID
+app.put('/api/orders/:id', (req, res) => {
+  const orderId = parseInt(req.params.id); // Convertir ID a número
+  const updatedOrder = req.body; // Datos enviados desde el frontend
+
+  const filepath = path.join(__dirname, 'pedidos.json'); // Ruta al archivo JSON
+
+  // Leer el archivo pedidos.json
+  fs.readFile(filepath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error al leer el archivo pedidos.json:', err);
+      return res.status(500).json({ message: 'Error al leer el archivo pedidos.json' });
+    }
+
+    // Parsear los datos del archivo JSON
+    let orders = JSON.parse(data);
+
+    // Encontrar el pedido a actualizar
+    const orderIndex = orders.findIndex(order => order.id === orderId);
+    if (orderIndex === -1) {
+      return res.status(404).json({ message: `Pedido con ID ${orderId} no encontrado.` });
+    }
+
+    // Actualizar solo los campos enviados desde el cliente
+    orders[orderIndex] = {
+      ...orders[orderIndex], // Datos originales
+      ...updatedOrder // Datos actualizados
+    };
+
+    // Guardar los cambios en pedidos.json
+    fs.writeFile(filepath, JSON.stringify(orders, null, 2), err => {
+      if (err) {
+        console.error('Error al escribir en el archivo pedidos.json:', err);
+        return res.status(500).json({ message: 'Error al guardar los cambios en pedidos.json' });
+      }
+
+      // Responder con el pedido actualizado
+      res.json(orders[orderIndex]);
+    });
+  });
+});
+
+
 
 // Ruta para actualizar el estado "striked" de un pedido
 app.put("/api/orders/:id", (req, res) => {
@@ -161,4 +206,44 @@ app.put('/api/menu', (req, res) => {
     });
   });
 });
+// Ruta para actualizar la disponibilidad de un ítem del menú
+app.put('/api/menu/:itemName', (req, res) => {
+  const menuPath = path.join(__dirname, 'menu.json');
+  const { itemName } = req.params; // Obtener el nombre del ítem desde la URL
+  const { available } = req.body; // Obtener el estado "available" desde el cuerpo de la solicitud
+
+  // Leer el archivo menu.json
+  fs.readFile(menuPath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error al leer menu.json:', err);
+      return res.status(500).json({ error: 'No se pudo leer el menú.' });
+    }
+
+    try {
+      const menu = JSON.parse(data);
+
+      if (menu.hasOwnProperty(itemName)) {
+        // Actualizar la disponibilidad del ítem
+        menu[itemName] = available;
+
+        // Guardar cambios en menu.json
+        fs.writeFile(menuPath, JSON.stringify(menu, null, 2), (writeErr) => {
+          if (writeErr) {
+            console.error('Error al escribir en menu.json:', writeErr);
+            return res.status(500).json({ error: 'No se pudo actualizar el menú.' });
+          }
+
+          res.status(200).json({ itemName, available });
+        });
+      } else {
+        res.status(404).json({ error: 'Ítem no encontrado en el menú.' });
+      }
+    } catch (parseErr) {
+      console.error('Error al analizar menu.json:', parseErr);
+      res.status(500).json({ error: 'Error al analizar el menú.' });
+    }
+  });
+});
+
+
 

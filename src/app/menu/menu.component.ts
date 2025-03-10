@@ -34,13 +34,27 @@ export class MenuComponent implements OnInit {
 
   availability: any = {}; // Disponibilidad cargada desde el JSON
   selectedItem: any = null;
+  private refreshInterval: any; // Variable para almacenar el temporizador
+
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
     this.loadAvailability(); // Cargar la disponibilidad al iniciar el componente
+
+    this.refreshInterval = setInterval(() => {
+      this.loadAvailability();
+    }, 5000); // 5000ms = 5 segundos
+
   }
+  // Limpia el temporizador al destruir el componente
+  ngOnDestroy(): void {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
+  }
+
 
   loadAvailability(): void {
     this.http.get(`${this.backendUrl}/api/menu`).subscribe(

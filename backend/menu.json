@@ -2,10 +2,10 @@
   "Hamburguesa": true,
   "Sushi": true,
   "Ensalada": true,
-  "Agua": false,
+  "Agua": true,
   "Refresco": true,
   "Vino": true,
   "Tarta": true,
-  "Helado": false,
+  "Helado": true,
   "Flan": true
 }
