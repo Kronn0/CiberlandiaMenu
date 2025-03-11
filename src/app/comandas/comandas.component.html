@@ -1,0 +1,99 @@
+<div class="comandas">
+  <h1>Comandas</h1>
+  <p>Esta página lista todos los pedidos actuales.</p>
+
+  <!-- Tabla de pedidos -->
+  <div *ngIf="orders.length > 0; else noOrders" class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th>Recibido</th>
+        <th>Comida</th>
+        <th>Mesa</th>
+        <th>Zona</th>
+        <th>Imagen</th> <!-- Nueva columna para la imagen -->
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Iterar sobre los pedidos -->
+      <tr
+        *ngFor="let order of orders; let i = index"
+        [ngClass]="{ 'row-striked': order.striked }"
+      >
+        <td>
+          <input
+            type="checkbox"
+            (change)="onCheck(i)"
+            [checked]="order.striked"
+          />
+        </td>
+        <td>{{ order.food }}</td>
+        <td>{{ order.table }}</td>
+        <td>{{ order.zone }}</td>
+        <!-- Nueva celda para la imagen -->
+        <td class="image-cell">
+          <img
+            [src]="getImageUrl(order.food)"
+            [alt]="order.food"
+            class="order-image"
+          />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Plantilla alternativa si no hay pedidos -->
+  <ng-template #noOrders>
+    <p>No hay pedidos disponibles actualmente.</p>
+  </ng-template>
+</div>
+
+<style>
+  .comandas {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #f7f9fb;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+  }
+
+  th {
+    background: #3498db;
+    color: white;
+    font-weight: bold;
+  }
+
+  .order-image {
+    width: 60px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+
+  .image-cell {
+    text-align: center;
+  }
+</style>

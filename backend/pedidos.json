@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "food": "Sushi",
+    "foodImage": null,
+    "table": null,
+    "zone": "Barra",
+    "striked": false,
+    "orderDate": "2025-03-11T12:29:54.564Z",
+    "completed": false,
+    "completedAt": null,
+    "diffTime": null
+  }
+]

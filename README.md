@@ -1,3 +1,80 @@
+
+
+# Ciberlandia Project
+Este proyecto cuenta con un frontend y un backend. A continuación, se explican los pasos necesarios para ejecutarlos correctamente.
+## **Requisitos Previos**
+
+
+### Pasos en powershell
+1. Comprobar la politica de ejecución de scripts.
+```
+#Ver la lista de permisos de scripts
+Get-ExecutionPolicy -List ​
+
+#Cambiar la politica a RemoteSigned
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser ​
+```
+2. Tener instalado **Node.js** en tu sistema. Puedes descargarlo aquí: [https://nodejs.org/](https://nodejs.org/). o haciendo los siguientes comandos:
+```
+# Download and install fnm:
+winget install Schniz.fnm
+
+# Download and install Node.js:
+fnm install 22
+
+# Verify the Node.js version:
+node -v # Should print "v22.14.0".
+
+# Verify npm version:
+npm -v # Should print "10.9.2".
+
+```
+3. Un navegador web para visualizar la aplicación.
+### Pasos en terminal de Webstorm
+4. instalar todas las dependencias
+```bash
+  npm install 
+```
+3. Opcional: Servidor de producción instalado localmente, como `serve`, que se puede instalar con `npm`:
+``` bash
+   npm install -g serve
+```
+## **Ejecución del Backend**
+1. Accede al directorio donde se encuentra el backend:
+``` bash
+   cd backend
+```
+2. Ejecuta el siguiente comando para iniciar el servidor:
+``` bash
+   node server.js
+```
+3. El backend estará escuchando en la dirección:
+``` 
+   http://ip-local:3000
+```
+Este será el punto de conexión para todas las API utilizadas en el proyecto.
+## **Ejecución del Frontend**
+
+1. Buildeamos la aplicación
+
+``` bash
+   ng build --configuration production
+```
+
+2. Accede al directorio donde se encuentra el proyecto construido (el directorio `/dist/ciberlandia`):
+``` bash
+   cd dist/ciberlandia
+```
+3. Inicia un servidor de producción con el siguiente comando:
+``` bash
+   serve -s -l 8080
+```
+4. Abre tu navegador y visita:
+``` 
+   http://localhost:8080
+   
+   http://ip-local:8080
+```
 # Ciberlandia
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.

@@ -1,17 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './menu/menu.component';
+import { ComandasComponent } from './comandas/comandas.component'; // Importa el módulo HTTP
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import {FormsModule} from "@angular/forms";
+import { PanelAdministradorComponent } from './panel-administrador/panel-administrador.component';
+import { HeaderComponent } from './header/header.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    PanelAdministradorComponent,
+    HeaderComponent
+
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule, // Asegúrate de que esté incluido
+    RouterModule,
+    ComandasComponent,
+    AppRoutingModule,
+    FormsModule,
+
   ],
   providers: [],
+  exports: [
+    HeaderComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

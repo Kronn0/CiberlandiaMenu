@@ -1,0 +1,38 @@
+/* Contenedor de la tabla centrada */
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilo para la tabla */
+table {
+  width: 80%;
+  border-collapse: collapse;
+  font-size: 18px;
+  text-align: center;
+}
+
+thead {
+  background-color: #f0f0f0;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.row-striked {
+  text-decoration: line-through; /* Rayar fila */
+  color: gray;
+}
+
+/* Aumentar tamaño del checkbox */
+input[type="checkbox"] {
+  transform: scale(1.5); /* Escalar el tamaño */
+}

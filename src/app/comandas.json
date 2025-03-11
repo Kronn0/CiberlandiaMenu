@@ -1,0 +1,5 @@
+[
+  { "food": "Pizza", "table": "Mesa 1", "zone": "Zona A" },
+  { "food": "Pasta", "table": "Mesa 2", "zone": "Zona B" },
+  { "food": "Ensalada", "table": "Mesa 3", "zone": "Zona C" }
+]

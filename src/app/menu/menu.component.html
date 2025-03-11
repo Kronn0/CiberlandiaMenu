@@ -1,0 +1,237 @@
+<div class="menu-container">
+  <app-header></app-header>
+  <h1>Menú</h1>
+
+  <!-- Selección de Zona -->
+  <div class="zone-selection">
+    <h2>Selecciona una Zona</h2>
+    <div class="zone-buttons">
+      <button *ngFor="let zone of zones"
+              (click)="selectZone(zone)"
+              [class.active]="selectedZone === zone">
+        {{ zone }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Selección de Mesa (Si no es Barra) -->
+  <div *ngIf="selectedZone !== 'Barra'" class="table-selection">
+    <h2>Selecciona una Mesa</h2>
+    <select [(ngModel)]="selectedTable">
+      <option *ngFor="let table of tables" [value]="table">
+        Mesa {{ table }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Selección de Comida, Bebida y Postre -->
+  <div class="category-container">
+    <!-- Selección de Comida -->
+    <div class="category">
+      <h2>Comida</h2>
+      <div class="items-column">
+        <button *ngFor="let food of foodOptions"
+                (click)="selectItem(food)"
+                [class.active]="selectedItem === food"
+                [class.red]="!isAvailable(food.name)">
+          <img [src]="food.image" alt="{{ food.name }}" class="button-image" />
+          {{ food.name }}
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Selección de Bebidas -->
+    <div class="category">
+      <h2>Entrantes</h2>
+      <div class="items-column">
+        <button *ngFor="let drink of drinkOptions"
+                (click)="selectItem(drink)"
+                [class.active]="selectedItem === drink"
+                [class.red]="!isAvailable(drink.name)">
+          <img [src]="drink.image" alt="{{ drink.name }}" class="button-image" />
+          {{ drink.name }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Selección de Postres -->
+    <div class="category">
+      <h2>Postres</h2>
+      <div class="items-column">
+        <button *ngFor="let dessert of dessertOptions"
+                (click)="selectItem(dessert)"
+                [class.active]="selectedItem === dessert"
+                [class.red]="!isAvailable(dessert.name)">
+          <img [src]="dessert.image" alt="{{ dessert.name }}" class="button-image" />
+          {{ dessert.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para Enviar Pedido -->
+  <button class="order-button" (click)="makeOrder()">Realizar Pedido</button>
+</div>
+
+<style>
+  /* Existing styles remain unchanged */
+  .menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  h1, h3 {
+    color: #2c3e50;
+  }
+
+  .zone-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .zone-buttons button {
+    background-color: #3498db;
+    border: none;
+    padding: 20px 30px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .zone-buttons button:hover,
+  .zone-buttons button.active {
+    background-color: #2980b9;
+    transform: translateY(-5px);
+  }
+
+  .table-selection select {
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .category-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .category {
+    width: 100%;
+    max-width: 220px; /* Ancho máximo para cada columna */
+  }
+
+  .category h2 {
+    font-size: 1.5em;
+    color: #34495e;
+  }
+
+  .items-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .items-column button {
+    padding: 20px 10px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-size: 1em;
+    text-align: center;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .items-column button:hover {
+    background-color: #bdc3c7;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .items-column button.active {
+    background-color: #2ecc71;
+    color: white;
+    font-weight: bold;
+    border-color: #27ae60;
+  }
+
+  .button-image {
+    width: 50px;
+    height: auto;
+    margin-right: 5px;
+  }
+
+  .order-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 20px 40px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .red {
+    background-color: red !important;
+    color: white !important;
+    border-color: darkred;
+    font-weight: bold;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+
+  .order-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+  }
+
+  /* Media Query for Mobile Devices */
+  @media (max-width: 768px) {
+    .category-container {
+      flex-direction: column; /* Stack categories vertically */
+      align-items: center;
+      gap: 20px; /* Reduce gap for mobile */
+    }
+
+    .category {
+      max-width: 100%; /* Full width for each category */
+      width: 90%; /* Slightly less than full width for padding */
+    }
+
+    .zone-buttons {
+      flex-direction: column; /* Stack zone buttons vertically */
+      gap: 10px; /* Reduce gap for mobile */
+    }
+
+    .zone-buttons button {
+      padding: 15px 20px; /* Slightly smaller padding */
+      font-size: 1em; /* Smaller font size */
+    }
+
+    .table-selection select {
+      width: 90%; /* Full width with slight padding */
+      font-size: 1em; /* Smaller font size */
+    }
+
+    .order-button {
+      padding: 15px 30px; /* Slightly smaller padding */
+      font-size: 1em; /* Smaller font size */
+    }
+  }
+</style>
