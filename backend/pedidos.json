@@ -1,85 +1,14 @@
 [
   {
-    "id": 3,
-    "food": "Tarta",
+    "id": 1,
+    "food": "Sushi",
     "foodImage": null,
     "table": null,
     "zone": "Barra",
-    "orderDate": "2025-03-10T08:23:03.183Z",
-    "completed": true,
-    "completedAt": "2025-03-10T10:34:56.717Z"
-  },
-  {
-    "id": 4,
-    "food": "Hamburguesa",
-    "foodImage": null,
-    "table": "4",
-    "zone": "Comedor 1",
-    "orderDate": "2025-03-10T08:28:21.263Z",
+    "striked": false,
+    "orderDate": "2025-03-11T12:29:54.564Z",
     "completed": false,
     "completedAt": null,
-    "striked": true
-  },
-  {
-    "id": 5,
-    "food": "Tarta",
-    "foodImage": null,
-    "table": null,
-    "zone": "Barra",
-    "orderDate": "2025-03-10T09:01:30.796Z",
-    "completed": true,
-    "completedAt": "2025-03-10T10:34:57.655Z"
-  },
-  {
-    "id": 6,
-    "food": "Tarta",
-    "foodImage": null,
-    "table": null,
-    "zone": "Barra",
-    "orderDate": "2025-03-10T09:01:47.165Z",
-    "completed": false,
-    "completedAt": null
-  },
-  {
-    "id": 7,
-    "food": "Tarta",
-    "foodImage": null,
-    "table": null,
-    "zone": "Barra",
-    "orderDate": "2025-03-10T09:04:11.490Z",
-    "completed": false,
-    "completedAt": null
-  },
-  {
-    "id": 8,
-    "food": "Refresco",
-    "foodImage": null,
-    "table": null,
-    "zone": "Barra",
-    "orderDate": "2025-03-10T09:04:32.295Z",
-    "completed": false,
-    "completedAt": null,
-    "striked": true
-  },
-  {
-    "id": 9,
-    "food": "Helado",
-    "foodImage": null,
-    "table": "3",
-    "zone": "Comedor 2",
-    "orderDate": "2025-03-10T09:04:36.321Z",
-    "completed": true,
-    "completedAt": null
-  },
-  {
-    "id": 10,
-    "food": "Flan",
-    "foodImage": null,
-    "table": null,
-    "zone": "Barra",
-    "orderDate": "2025-03-10T09:06:36.496Z",
-    "completed": false,
-    "completedAt": null,
-    "striked": true
+    "diffTime": null
   }
 ]

@@ -1,11 +1,11 @@
 {
   "Hamburguesa": true,
-  "Sushi": true,
+  "Sushi": false,
   "Ensalada": true,
-  "Agua": true,
-  "Refresco": true,
-  "Vino": true,
-  "Tarta": true,
-  "Helado": true,
-  "Flan": true
+  "Sandía": true,
+  "Polvito Uruguayo": false,
+  "Millo": false,
+  "Lasaña": false,
+  "Sandwich": false,
+  "Yogurt": false
 }

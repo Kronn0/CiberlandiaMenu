@@ -11,25 +11,25 @@ export class MenuComponent implements OnInit {
 
   zones: string[] = ["Comedor 1", "Comedor 2", "Barra"];
   selectedZone: string = "";
-  tables: number[] = [1, 2, 3, 4, 5];
+  tables: number[] = [1, 2, 3];
   selectedTable: number | null = null;
 
   foodOptions = [
     {name: "Hamburguesa", image: `${this.backendUrl}/images/hamburguesa.png`},
-    {name: "Sushi", image: `${this.backendUrl}/images/sushi.png`},
-    {name: "Ensalada", image: `${this.backendUrl}/images/ensalada.png`}
+    {name: "Sandwich", image: `${this.backendUrl}/images/sandwich.png`},
+    {name: "Lasaña", image: `${this.backendUrl}/images/lasaña.png`}
   ];
 
   drinkOptions = [
-    {name: "Agua", image: `${this.backendUrl}/images/agua.png`},
-    {name: "Refresco", image: `${this.backendUrl}/images/refresco.png`},
-    {name: "Vino", image: `${this.backendUrl}/images/vino.png`}
+    {name: "Sushi", image: `${this.backendUrl}/images/sushi.png`},
+    {name: "Ensalada", image: `${this.backendUrl}/images/ensalada.png`},
+    {name: "Millo", image: `${this.backendUrl}/images/millo.png`}
   ];
 
   dessertOptions = [
-    {name: "Tarta", image: `${this.backendUrl}/images/tarta.png`},
-    {name: "Helado", image: `${this.backendUrl}/images/helado.png`},
-    {name: "Flan", image: `${this.backendUrl}/images/flan.png`}
+    {name: "Polvito Uruguayo", image: `${this.backendUrl}/images/polvito.png`},
+    {name: "Yogurt", image: `${this.backendUrl}/images/yogurt.png`},
+    {name: "Sandía", image: `${this.backendUrl}/images/sandia.png`}
   ];
 
   availability: any = {}; // Disponibilidad cargada desde el JSON

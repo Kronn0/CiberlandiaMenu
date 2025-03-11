@@ -5,7 +5,7 @@ Este proyecto cuenta con un frontend y un backend. A continuación, se explican 
 ## **Requisitos Previos**
 
 
-
+### Pasos en powershell
 1. Comprobar la politica de ejecución de scripts.
 ```
 #Ver la lista de permisos de scripts
@@ -30,7 +30,11 @@ npm -v # Should print "10.9.2".
 
 ```
 3. Un navegador web para visualizar la aplicación.
-
+### Pasos en terminal de Webstorm
+4. instalar todas las dependencias
+```bash
+  npm install 
+```
 3. Opcional: Servidor de producción instalado localmente, como `serve`, que se puede instalar con `npm`:
 ``` bash
    npm install -g serve
@@ -70,7 +74,7 @@ Este será el punto de conexión para todas las API utilizadas en el proyecto.
    http://localhost:8080
    
    http://ip-local:8080
-
+```
 # Ciberlandia
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
