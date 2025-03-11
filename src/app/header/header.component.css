@@ -26,3 +26,15 @@
   object-fit: contain;
   flex-shrink: 0;
 }
+.header .images-container .image-track img:first-child {
+  width: 400px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.header .images-container .image-track img:nth-child(8) {
+  width: 400px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
