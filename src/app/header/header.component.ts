@@ -9,9 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class HeaderComponent implements OnInit, OnDestroy {
   leftImages: string[] = [];
   rightImages: string[] = [];
+  allImages: string[] = [];
   private refreshInterval: any;
-
-  // URL dinámica para el backend
   private backendUrl = `${window.location.protocol}//${window.location.hostname}:3000`;
 
   constructor(private http: HttpClient) {}
@@ -19,40 +18,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadImages();
 
-    // Si necesitas refrescar las imágenes dinámicamente, puedes activar el intervalo
+    // Refrescar imágenes cada 10 segundos (opcional)
     this.refreshInterval = setInterval(() => {
       this.loadImages();
-    }, 10000); // Por ejemplo, cada 10 segundos
+    }, 10000);
   }
 
   ngOnDestroy(): void {
     if (this.refreshInterval) {
-      clearInterval(this.refreshInterval); // Limpia el intervalo al destruir el componente
+      clearInterval(this.refreshInterval);
     }
   }
 
-  // Método para cargar las imágenes desde el backend
   loadImages(): void {
     const leftImageNames = ['cabildo_ftv', 'cabildo_gc', 'cabildo_lz', 'ciberlandia_corto'];
     const rightImageNames = ['elder', 'itq', 'sergio_alonso'];
 
-    // Generar URLs para las imágenes del lado izquierdo
-    this.leftImages = leftImageNames.map(name => {
-      const url = this.getImageUrl(name);
-      console.log('Imagen izquierda URL:', url); // Debugging: Imprime la URL generada
-      return url;
-    });
+    this.leftImages = leftImageNames.map(name => this.getImageUrl(name));
+    this.rightImages = rightImageNames.map(name => this.getImageUrl(name));
 
-    // Generar URLs para las imágenes del lado derecho
-    this.rightImages = rightImageNames.map(name => {
-      const url = this.getImageUrl(name);
-      console.log('Imagen derecha URL:', url); // Debugging: Imprime la URL generada
-      return url;
-    });
+    // Duplicamos las imágenes para un efecto continuo
+    this.allImages = [...this.leftImages, ...this.rightImages, ...this.leftImages, ...this.rightImages];
   }
 
-
-  // Método para construir dinámicamente la URL de las imágenes
   getImageUrl(imageName: string): string {
     return `${this.backendUrl}/images/${imageName}.png`;
   }

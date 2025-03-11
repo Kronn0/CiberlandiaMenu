@@ -1,51 +1,28 @@
-.header {
-  width: 100%; /* Ocupa todo el ancho */
-  background-color: #3498db;
-  color: white;
-  text-align: center;
-  padding: 15px 20px;
-  font-size: 1.5em;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Espacio entre los elementos */
-  position: fixed; /* Se mantiene fijo arriba */
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
-
-.header h1 {
-  flex-grow: 1; /* Hace que el título se expanda */
-  text-align: center;
-  margin: 0;
-}
-
-.header-logo {
-  width: 50px; /* Ajusta el tamaño según necesites */
-  height: auto;
-}
-
-.comandas {
-  margin-top: 80px; /* Ajusta el contenido para que no quede tapado por el header */
-}
-
 .images-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.image-track {
   display: flex;
-  flex-direction: row; /* Garantiza que las imágenes estén en fila */
-  flex-wrap: nowrap; /* No permite que las imágenes bajen a otra línea */
-  gap: 10px; /* Espaciado horizontal entre imágenes */
-  align-items: center;
-  justify-content: flex-start; /* Alinea las imágenes de izquierda a derecha */
+  gap: 10px;
+  animation: moveImages 15s linear infinite;
+  width: max-content;
+}
+
+@keyframes moveImages {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .header-image {
-  width: 80px; /* Ajusta a tu preferencia */
+  width: 80px;
   height: auto;
-  object-fit: contain; /* Mantiene la proporción de la imagen */
-}
-.images-container img:first-child {
-  width: 500px; /* Haz la primera imagen un poco más grande */
-  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
 }
