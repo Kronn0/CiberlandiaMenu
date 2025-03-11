@@ -9,7 +9,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Espacio entre los elementos */
+  justify-content: center; /* Espacio entre los elementos */
   position: fixed; /* Se mantiene fijo arriba */
   top: 0;
   left: 0;
@@ -29,4 +29,23 @@
 
 .comandas {
   margin-top: 80px; /* Ajusta el contenido para que no quede tapado por el header */
+}
+
+.images-container {
+  display: flex;
+  flex-direction: row; /* Garantiza que las imágenes estén en fila */
+  flex-wrap: nowrap; /* No permite que las imágenes bajen a otra línea */
+  gap: 10px; /* Espaciado horizontal entre imágenes */
+  align-items: center;
+  justify-content: flex-start; /* Alinea las imágenes de izquierda a derecha */
+}
+
+.header-image {
+  width: 80px; /* Ajusta a tu preferencia */
+  height: auto;
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+}
+.images-container img:first-child {
+  width: 500px; /* Haz la primera imagen un poco más grande */
+  height: auto;
 }

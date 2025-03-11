@@ -1,5 +1,7 @@
 <header class="header">
-  <img src="../backend/images/agua.png" alt="Logo Izquierda" class="header-logo left">
-  <h1>Ciberlandia 2025</h1>
-  <img src="../backend/images/agua.png" alt="Logo Derecha" class="header-logo right">
+  <!-- Contenedor de todas las imágenes en fila de izquierda a derecha -->
+  <div class="images-container">
+    <img *ngFor="let img of leftImages" [src]="img" alt="Imagen izquierda" class="header-image">
+    <img *ngFor="let img of rightImages" [src]="img" alt="Imagen derecha" class="header-image">
+  </div>
 </header>
