@@ -8,11 +8,12 @@
     <table>
       <thead>
       <tr>
-        <th>Recibido</th>
+        <th>Enviado</th>
         <th>Comida</th>
         <th>Mesa</th>
         <th>Zona</th>
         <th>Imagen</th> <!-- Nueva columna para la imagen -->
+        <th>Entregado</th>
       </tr>
       </thead>
       <tbody>
@@ -39,6 +40,7 @@
             class="order-image"
           />
         </td>
+        <td>{{getDelivered(order.completed)}}</td>
       </tr>
       </tbody>
     </table>

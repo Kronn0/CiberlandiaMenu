@@ -7,6 +7,7 @@ interface Order {
   food: string;
   table: string;
   zone: string;
+  completed: boolean
   striked: boolean;
 }
 
@@ -33,7 +34,7 @@ export class ComandasComponent implements OnInit, OnDestroy {
     // Configurar recarga automática cada 5 segundos
     this.refreshInterval = setInterval(() => {
       this.loadOrders(); // Recarga las órdenes periódicamente
-    }, 5000); // Cada 5000 ms = 5 segundos
+    }, 1000);
   }
 
   ngOnDestroy(): void {
@@ -71,6 +72,15 @@ export class ComandasComponent implements OnInit, OnDestroy {
     // Retornar la URL completa
     return `${this.backendImageUrl}/${formattedName}`;
   }
+
+  getDelivered(food: boolean): string {
+    if(food){
+      return "✅"
+    }else{
+      return "❌"
+    }
+
+}
 
   // Manejar el cambio de estado striked
   onCheck(index: number): void {

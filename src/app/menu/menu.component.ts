@@ -27,9 +27,9 @@ export class MenuComponent implements OnInit {
   ];
 
   dessertOptions = [
-    {name: "Polvito Uruguayo", image: `${this.backendUrl}/images/polvito.png`},
+    {name: "Polvito Uruguayo", image: `${this.backendUrl}/images/PolvitoUruguayo.png`},
     {name: "Yogurt", image: `${this.backendUrl}/images/yogurt.png`},
-    {name: "Sandía", image: `${this.backendUrl}/images/sandia.png`}
+    {name: "Sandía", image: `${this.backendUrl}/images/sandía.png`}
   ];
 
   availability: any = {}; // Disponibilidad cargada desde el JSON
@@ -45,7 +45,7 @@ export class MenuComponent implements OnInit {
 
     this.refreshInterval = setInterval(() => {
       this.loadAvailability();
-    }, 5000); // 5000ms = 5 segundos
+    }, 1000);
 
   }
   // Limpia el temporizador al destruir el componente

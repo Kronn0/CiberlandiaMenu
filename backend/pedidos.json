@@ -1,3 +1,26 @@
 [
-
+  {
+    "id": 1,
+    "food": "Sushi",
+    "foodImage": null,
+    "table": null,
+    "zone": "Barra",
+    "striked": true,
+    "orderDate": "2025-03-12T12:04:15.045Z",
+    "completed": true,
+    "completedAt": "2025-03-12T12:06:08.946Z",
+    "diffTime": null
+  },
+  {
+    "id": 3,
+    "food": "Lasaña",
+    "foodImage": null,
+    "table": "2",
+    "zone": "Comedor 2",
+    "striked": false,
+    "orderDate": "2025-03-12T12:16:17.254Z",
+    "completed": true,
+    "completedAt": "2025-03-12T12:17:18.490Z",
+    "diffTime": null
+  }
 ]

@@ -7,17 +7,20 @@
       <thead>
       <tr>
         <th>Producto</th>
+        <th>Mesa</th>
+        <th>Zona</th>
         <th>Entregar</th>
         <th>Hora de Solicitud</th>
         <th>Hora de Entrega</th>
         <th>Diferencia</th>
-        <th>Bloquear</th>
         <th>Eliminar</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let order of orders">
         <td>{{ order.food }}</td>
+        <td>{{ order.table }}</td>
+        <td>{{ order.zone }}</td>
         <td>
           <button (click)="markAsDelivered(order)" [disabled]="order.completed">
             {{ order.completed ? 'Entregado' : 'Entregar' }}
@@ -26,9 +29,6 @@
         <td>{{ order.orderDate | date: 'shortTime' }}</td>
         <td>{{ order.completedAt ? (order.completedAt | date: 'shortTime') : 'Pendiente' }}</td>
         <td>{{ getTimeDifference(order) }}</td>
-        <td>
-          <input type="checkbox" [checked]="order.locked" (change)="toggleLocked(order)" />
-        </td>
         <td>
           <button
             (click)="deleteOrder(order.id)"

@@ -37,8 +37,9 @@ export class PanelAdministradorComponent implements OnInit, OnDestroy {
 
     // Configurar la actualización automática del menú cada 5 segundos
     this.refreshInterval = setInterval(() => {
-      this.loadMenu(); // Recargar menú desde el servidor
-    }, 5000); // Actualiza cada 5 segundos
+      this.loadMenu();
+      this.loadOrders()// Recargar menú desde el servidor
+    }, 1000);
   }
 
   // Limpia el temporizador al destruir el componente
