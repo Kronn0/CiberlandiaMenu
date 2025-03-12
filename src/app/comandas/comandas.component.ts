@@ -13,12 +13,6 @@ interface Order {
 @Component({
   selector: 'app-comandas',
   templateUrl: './comandas.component.html',
-  standalone: true,
-  imports: [
-    NgClass,
-    NgIf,
-    NgForOf
-  ],
   styleUrls: ['./comandas.component.css']
 })
 export class ComandasComponent implements OnInit, OnDestroy {

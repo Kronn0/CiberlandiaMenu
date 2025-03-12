@@ -1,5 +1,9 @@
 #preconssola
-Start-Process powershell -ArgumentList "-NoExit", "-Command npm install; npm install -g serve"
+$proceso = Start-Process powershell -ArgumentList "-NoExit", "-Command npm install; npm install -g serve; npm install -g @angular/cli; exit"
+
+while (Get-Process -Name $proceso -ErrorAction SilentlyContinue) {
+    Start-Sleep -Seconds 1
+}
 
 # Abre la primera consola y ejecuta node /backend/server.js
 Start-Process powershell -ArgumentList "-NoExit", "-Command node backend/server.js"

@@ -1,11 +1,11 @@
 {
   "Hamburguesa": true,
-  "Sushi": false,
+  "Sushi": true,
   "Ensalada": true,
   "Sandía": true,
-  "Polvito Uruguayo": false,
-  "Millo": false,
-  "Lasaña": false,
-  "Sandwich": false,
-  "Yogurt": false
+  "Polvito Uruguayo": true,
+  "Millo": true,
+  "Lasaña": true,
+  "Sandwich": true,
+  "Yogurt": true
 }
